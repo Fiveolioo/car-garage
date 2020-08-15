@@ -2,7 +2,9 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/signup" do
-    erb :"/users/new.html"
+    redirect "/users/#{current_user.id}" if logged_in?
+    @fail = params[:fail]
+    erb :'/users/signup'
   end
 
   get "/login" do
@@ -22,18 +24,4 @@ class UsersController < ApplicationController
     User.create()
     redirect "/users"
   end
-  # # GET: /users/5/edit
-  # get "/users/:id/edit" do
-  #   erb :"/users/edit.html"
-  # end
-
-  # # PATCH: /users/5
-  # patch "/users/:id" do
-  #   redirect "/users/:id"
-  # end
-
-  # # DELETE: /users/5/delete
-  # delete "/users/:id/delete" do
-  #   redirect "/users"
-  # end
 end

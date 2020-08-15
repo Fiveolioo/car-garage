@@ -3,16 +3,14 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+    enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
+    set :session_secret, ENV['SESSION_SECRET']
   end
 
   get "/" do
     redirect :garage
-  end
-
-  get '/' do
-    redirect :movies
   end
 
   helpers do
@@ -28,6 +26,4 @@ class ApplicationController < Sinatra::Base
       session
     end
   end
-end
-
 end
