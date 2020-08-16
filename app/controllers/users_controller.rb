@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  # GET: /users/new
   get "/signup" do
     redirect "/users/#{current_user.id}" if logged_in?
     @fail = params[:fail]
@@ -28,16 +27,11 @@ class UsersController < ApplicationController
   end
 
   post "/logout" do
-    redirect '/'
+    session.destroy
+    redirect '/login'
   end
 
   get "/users/:id" do
     erb :"/users/show.erb"
-  end
-
-  post "/users" do
-    user = params
-    User.create()
-    redirect "/users"
   end
 end

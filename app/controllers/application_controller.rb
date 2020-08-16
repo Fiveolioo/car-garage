@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    redirect :garage
+    erb :homepage
   end
 
   helpers do

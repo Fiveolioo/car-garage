@@ -4,6 +4,8 @@ class CreateCars < ActiveRecord::Migration
       t.string :make
       t.string :model
       t.string :color
+      t.string :garage_id
+      t.string :user_id
 
       t.timestamps null: false
     end
