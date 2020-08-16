@@ -1,0 +1,8 @@
+<h1>Here is your list of Garages saved</h1> 
+ <ul>
+  <% @garages.each do |garage| %>
+    <li><a href='/garages/<%= garage.id %>'><%= garage.name %></a></li>
+  <% end %>
+</ul>
+<p>Need to add another garage?</p> 
+<p><a href='/garages/new'>Click Here!</a></p>
