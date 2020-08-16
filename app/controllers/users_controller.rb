@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if params.values.any?(&:empty?)
     elsif User.find_by(username: params[:username])
     elsif User.find_by(email: params[:email])
-     redirect '/signup?error=Invalid, please try again :('
+     redirect '/signup'
     else User.create(
      username: params[:username],
      email: params[:email],
