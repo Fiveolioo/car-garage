@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   get "/signup" do
     redirect "/users/#{current_user.id}" if logged_in?
-    @fail = params[:fail]
     erb :'/users/signup'
   end
 
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
   get "/login" do
     redirect "/users/#{current_user.id}" if logged_in?
     @fail = params[:fail]
-    erb :'/users/login'
+    erb :"/users/login"
   end
 
   post '/login' do
@@ -41,6 +40,10 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id" do
-    erb :"/users/show"
+    @user = User.find_by(id: params[:id])
+    redirect back unless @user
+    garage_ids = @user.cars.collect { |car| car[:garage_id] }
+    @garages = Garage.all.select { |garage| garage_ids.include?(garage.id) }
+    erb :'/users/show'
   end
 end

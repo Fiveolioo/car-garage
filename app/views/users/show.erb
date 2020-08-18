@@ -1,0 +1,21 @@
+<h1>Welcome <%= @user.username =>! Here are all your cars!</h1>
+
+<% if @user.cars.empty? %>
+   <p>You do not have any cars :(</p>
+   else
+  <% @user.cars.each do |car| %>
+    <% garage = @garages.detect { |garage| garage.id == car.garage_id } %>
+    <p>Inside<a href='/garages/<%= garage.id %>'><%= garage.name %></a>:</p>
+    <p><%= car.make %></p>
+    <p><%= car.model %></p>
+    <p><%= car.color %></p>
+    <% end %>
+    <% if @user == current_user %>
+      <div class='current_user_actions_car_<%= car.id %>'>
+        <a href='/cars/<%= car.id %>/edit'>Edit car</a>
+        <form method='post' action='/cars/<%= car.id %>/delete'>
+          <input type='hidden' name='_method' value='delete'>
+          <input type='submit' name='delete' value='Delete Car'>
+        </form>
+      </div>
+    <% end %>

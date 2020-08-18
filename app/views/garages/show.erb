@@ -1,19 +1,26 @@
 <h1><%= @garage.name %></h1>
-<% if @garage.cars.empty? %>
-<p><%= @garage.name %> garage is empty!</p>
-   else
-   <% @garage.cars.each do |car| %>
-    <% user = @users.detect { |user| user.id == car.user_id } %>
-    <p><%= car.content%> by <a href='/users/<%= user.id %>'><%= user.username %></a></p>
-    <% if user == current_user %>
-      <div class='current_user_actions_review_<%=car.id%>'>
-        <a href='/cars/<%= car.id %>/edit'>edit car</a>
-        <form method='post' action='/cars/<%= car.id %>/delete'>
-          <input type='hidden' name='_method' value='delete'>
-          <input type='submit' name='delete' value='Delete Car'>
-        </form>
-      </div>
-      <% end %>
+  <% if @garage.cars.empty? %>
+    <p><%= @garage.name %> garage is empty!</p>
+  <% else %>
+    <% @garage.cars.each_with_index do |car, index| %>
+      <h4>Car <%= "#{index+1}" %></h4>
+      <p>Make: <%= car.make %></p>
+      <p>Model: <%= car.model %></p>
+      <p>Color: <%= car.color %></p>
+    <a href='/cars/<%= car.id %>/edit'>edit car</a>
+    <form method='post' action='/cars/<%= car.id %>/delete'>
+      <input type='hidden' name='_method' value='delete'>
+      <input type='submit' name='delete' value='Delete Car'>
+    </form>
     <% end %>
-    <hr>
-  <% end %> 
+  <% end %>
+<hr>
+
+<h4>Add a Car!</h4>
+  <form method='post' action='/cars'>
+    <input type='hidden' name='garage_id' value='<%=@garage.id%>'> 
+    <p>Make:<input type='text' name='make'></p><br>
+    <p>Model:<input type='text' name='model'></p><br>
+    <p>Color:<input type='text' name='color'></p><br>
+    <input type='submit' value='ADD'>
+  </form>
