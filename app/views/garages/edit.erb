@@ -1,0 +1,6 @@
+<h1>Edit Garage Name</h1>
+<form method='post' action='/garages/<%= @garage.id %>'>
+    <input type='hidden' id='hidden' name='_method' value='patch'> 
+    <p>Name:<input type='text' name='name' value='<%= @garage.name %>'></p><br>
+    <input type='submit' value='Update'>
+</form>

@@ -1,7 +1,12 @@
 <h1>Here is your list of Garages saved</h1> 
  <ul>
   <% @garages.each do |garage| %>
-    <li><a href='/garages/<%= garage.id %>'><%= garage.name %></a></li>
+    <li><a href='/garages/<%= garage.id %>'><h2><%= garage.name %></h2></a></li>
+    <a href='/garages/<%= garage.id %>/edit'>Edit Garage Name</a>
+    <form method='post' action='/garages/<%= garage.id %>/delete'>
+      <input type='hidden' name='_method' value='delete'>
+      <input type='submit' name='delete' value='Delete Garage'>
+    </form>
   <% end %>
 </ul>
 <p>Need to add another garage?</p> 

@@ -7,7 +7,7 @@ class GaragesController < ApplicationController
     garage = Garage.create(
       name: params[:name]
     )
-    redirect "/garages/#{garage.id}"
+    redirect '/garages'
   end
 
   get '/garages/:id' do
@@ -20,5 +20,22 @@ class GaragesController < ApplicationController
   get '/garages' do
     @garages = Garage.all
     erb :'/garages/index'
+  end
+
+  get '/garages/:id/edit' do    
+    @garage = Garage.find(params[:id])
+    erb :"/garages/edit"
+  end
+
+  patch '/garages/:id' do
+    garage = Garage.find(params[:id])
+    garage.update(name: params[:name])
+    redirect "/garages"
+  end
+
+  delete '/garages/:id/delete' do
+    garage = Garage.find_by(id: params[:id])
+    garage.destroy
+    redirect back
   end
 end
