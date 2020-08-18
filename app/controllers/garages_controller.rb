@@ -35,6 +35,8 @@ class GaragesController < ApplicationController
 
   delete '/garages/:id/delete' do
     garage = Garage.find_by(id: params[:id])
+    car = Car.find_by(id: params[:id])
+    car.destroy
     garage.destroy
     redirect back
   end

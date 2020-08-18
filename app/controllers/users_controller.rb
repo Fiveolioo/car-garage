@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 
   get "/login" do
     redirect "/users/#{current_user.id}" if logged_in?
-    @fail = params[:fail]
     erb :"/users/login"
   end
 
@@ -30,6 +29,7 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect "/users/#{user.id}"
+    else redirect back
     end
   end
 

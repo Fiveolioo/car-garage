@@ -1,10 +1,7 @@
 <h1>Create an account to get started!</h1>
-<% if @fail %>
-  <p><%=@fail%></p>
-<% end %>
 <form method='post' action='/signup'>
   <p>Username<br><input type='text' name='username'></p>
-  <p>Email<br><input type='text' name='email'></p>
+  <p>Email<br><input type='email' name='email'></p>
   <p>Password<br><input type='password' name='password'></p>
   <input type='submit' value='Submit'>
 </form>
