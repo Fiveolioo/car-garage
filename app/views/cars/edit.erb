@@ -1,0 +1,9 @@
+<h1>Edit Your Car!</h1>
+<form method='post' action='/cars/<%= @car.id %>'>
+    <input type='hidden' id='hidden' name='_method' value='patch'> 
+    <p>Make:<input type='text' name='make' value='<%= @car.make %>'></p><br>
+    <p>Model:<input type='text' name='model' value='<%= @car.model %>'></p><br>
+    <p>Color:<input type='text' name='color' value='<%= @car.color %>'></p><br>
+    <input type='submit' value='Update'>
+</form>
+
