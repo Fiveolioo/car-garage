@@ -1,26 +1,6 @@
 class UsersController < ApplicationController
 
-  get "/signup" do
-    redirect "/users/#{current_user.id}" if logged_in?
-    erb :'/users/signup'
-  end
-
-  post "/signup" do
-    if params.values.any?(&:empty?)
-    elsif User.find_by(username: params[:username])
-    elsif User.find_by(email: params[:email])
-     redirect '/signup'
-    else User.create(
-     username: params[:username],
-     email: params[:email],
-     password: params[:password]
-   )
-    redirect "/login"
-    end
-  end
-
   get "/login" do
-    redirect "/users/#{current_user.id}" if logged_in?
     erb :"/users/login"
   end
 
@@ -32,18 +12,35 @@ class UsersController < ApplicationController
     else redirect back
     end
   end
-
-
+  
   post "/logout" do
     session.destroy
     redirect '/login'
   end
-
+  
   get "/users/:id" do
     @user = User.find_by(id: params[:id])
-    redirect back unless @user
-    garage_ids = @user.cars.collect { |car| car[:garage_id] }
+    redirect back unless @user 
+    garage_ids = @user.cars.map { |car| car[:garage_id] }
     @garages = Garage.all.select { |garage| garage_ids.include?(garage.id) }
     erb :'/users/show'
+  end
+
+
+  get "/signup" do
+    redirect "/users/#{current_user.id}" if logged_in?
+    erb :'/users/signup'
+  end
+
+  post "/signup" do
+    if params.values.any?(&:empty?) || User.find_by(username: params[:username]) || User.find_by(email: params[:email])
+     redirect '/signup'
+    else User.create(
+     username: params[:username],
+     email: params[:email],
+     password: params[:password]
+   )
+    redirect "/login"
+    end
   end
 end
