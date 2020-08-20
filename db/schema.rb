@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20200816084941) do
     t.string   "make"
     t.string   "model"
     t.string   "color"
-    t.string   "garage_id"
-    t.string   "user_id"
+    t.integer  "garage_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

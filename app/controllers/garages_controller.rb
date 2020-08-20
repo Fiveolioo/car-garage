@@ -12,7 +12,7 @@ class GaragesController < ApplicationController
 
   get '/garages/:id' do
     @garage = Garage.find_by(id: params[:id])
-    user_ids = @garage.cars.collect { |car| car[:user_id] }
+    user_ids = @garage.cars.map { |car| car[:user_id] }
     @users = User.all.select { |user| user_ids.include?(user.id) }
     erb :'/garages/show'
   end
