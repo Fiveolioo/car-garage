@@ -1,14 +1,10 @@
-<h1>Here is a list of Garages saved</h1> 
+<h1>Here is a list of garages to join</h1> 
  <ul>
   <% @garages.each do |garage| %>
     <li><a href='/garages/<%= garage.id %>'><h2><%= garage.name %></h2></a></li>
     <a href='/garages/<%= garage.id %>/edit'>Edit Garage Name</a>
-    <form method='post' action='/garages/<%= garage.id %>/delete'>
-      <input type='hidden' name='_method' value='delete'>
-      <input type='submit' name='delete' value='Delete Garage'>
-    </form>
     <hr>
     <% end %>
 </ul>
-<p>Need to a garage?</p> 
+<h4>Need to add a garage?</h4>
 <p><a href='/garages/new'>Click Here!</a></p>

@@ -1,11 +1,12 @@
 <h1>Welcome <%= @user.username %>! Here are all your cars!</h1>
 
 <% if @user.cars.empty? %>
-   <p>Hmm... Seems like you dont have any cars.</p>
+   <p>Hmm... Seems like you don't have any cars.</p>
    <a href='/garages/new'>Click here to add!</a>
-<% else @user == current_user %>
+<% elsif @user == current_user %>
    <% @user.cars.each do |car| %>
-    <p>Garage: <a href='/garages/<%= car.garage_id %>'>View</a>
+    <% garage = @garages.detect {|garage| garage.id == car.garage_id} %>
+    <p>Garage Name: <a href='/garages/<%= garage.id %>'><%= garage.name %></a>
       <p>Make: <%= car.make %></p>
       <p>Model: <%= car.model %></p>
       <p>Color: <%= car.color %></p>
@@ -13,7 +14,7 @@
       <form method='post' action='/cars/<%= car.id %>/delete'>
         <input type='hidden' name='_method' value='delete'>
         <input type='submit' name='delete' value='Delete Car'>
-        <hr>
       </form>
+      <hr>
     <% end %>
   <% end %>

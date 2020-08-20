@@ -1,10 +1,10 @@
-<h1><%= @garage.name %></h1>
+<h1>~<%= @garage.name %>~</h1>
   <% if @garage.cars.empty? %>
     <p><%= @garage.name %> garage is empty!</p>
   <% else %>
     <% @garage.cars.each_with_index do |car, index| %>
       <% user = @users.detect { |user| user.id == car.user_id } %>
-      <h4>Car <%= "#{index+1}" %> by <%= user.username %></a></h4>
+      <h4>Car #<%= "#{index+1}" %> by <%= user.username %></a></h4>
       <p>Make: <%= car.make %></p>
       <p>Model: <%= car.model %></p>
       <p>Color: <%= car.color %></p>
@@ -15,15 +15,15 @@
       <input type='submit' name='delete' value='Delete Car'>
     </form>
       <% end %>
+      <hr>
     <% end %>
   <% end %>
-<hr>
 
-<h4>Add a Car!</h4>
+<h4>Add a car!</h4>
   <form method='post' action='/cars'>
     <input type='hidden' name='garage_id' value='<%=@garage.id%>'> 
-    <p>Make:<input type='text' name='make'></p><br>
-    <p>Model:<input type='text' name='model'></p><br>
-    <p>Color:<input type='text' name='color'></p><br>
+    <p>Make: <input type='text' name='make'></p>
+    <p>Model: <input type='text' name='model'></p>
+    <p>Color: <input type='text' name='color'></p>
     <input type='submit' value='Add'>
   </form>

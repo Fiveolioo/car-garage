@@ -11,12 +11,12 @@
       <form method='post' action='/logout'>
         <button type='submit' value='Log Out'>Logout</button>
       </form>
-      <a href='/users/<%=current_user.id%>'>Your Profile</a> | 
+      <a href='/users/<%=current_user.id%>'>Your Profile</a> |
+      <a href="/garages">Garage List</a> 
     <% else %>
       <a href='/login' >Login</a> | 
       <a href='/signup'>Sign Up</a> | 
     <% end %>
-    <a href="/garages">Garage List</a>
     <div class="wrapper">    
       <%= yield %>
     </div>
