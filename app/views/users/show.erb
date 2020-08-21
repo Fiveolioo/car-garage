@@ -1,8 +1,9 @@
 <h1>Welcome <%= @user.username %>! Here are all your cars!</h1>
 
 <% if @user.cars.empty? %>
-   <p>Hmm... Seems like you don't have any cars.</p>
-   <a href='/garages/new'>Click here to add!</a>
+   <p>Hmm... Seems like you don't have any cars. Click on Garage list to join a garage.</p>
+   <p>or</p>
+   <a href='/garages/new'>Add a new garage</a>
 <% elsif @user == current_user %>
    <% @user.cars.each do |car| %>
     <% garage = @garages.detect {|garage| garage.id == car.garage_id} %>

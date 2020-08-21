@@ -1,13 +1,16 @@
 class GaragesController < ApplicationController
+  
   get '/garages/new' do
     erb :'/garages/new'
   end
 
   post '/garages' do
-    garage = Garage.create(
-      name: params[:name]
-    )
+    if params.values.any?(&:empty?)
+      redirect back
+    else
+    garage = Garage.create(params)
     redirect '/garages'
+    end
   end
 
   get '/garages/:id' do
@@ -31,5 +34,5 @@ class GaragesController < ApplicationController
     garage = Garage.find(params[:id])
     garage.update(name: params[:name])
     redirect "/garages"
+    end
   end
-end

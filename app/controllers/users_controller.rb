@@ -35,12 +35,8 @@ class UsersController < ApplicationController
   post "/signup" do
     if params.values.any?(&:empty?) || User.find_by(username: params[:username]) || User.find_by(email: params[:email])
      redirect '/signup'
-    else User.create(
-     username: params[:username],
-     email: params[:email],
-     password: params[:password]
-   )
+    else User.create(params)
     redirect "/login"
+      end
     end
   end
-end
